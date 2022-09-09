@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <MainHeader/>
-    <MainContainer/>
-    <MainFooter/>
+    <MainHeader />
+    <MainContainer />
+    <MainFooter />
   </div>
 </template>
 
@@ -17,8 +17,10 @@ export default {
     MainContainer,
     MainHeader,
     MainFooter
+  },
+  
 }
-}
+ 
 </script>
 
 <style lang="scss">
