@@ -4,13 +4,15 @@
     <button class="ms-2" @click="searchMovies">Cerca!</button>
     <ul>
       <li v-for="movie in movies" :key="movie.id">
-        {{ movie.title }}
+        <div>Titolo:{{ movie.title }}</div>
+        <div>Titolo Originale:{{ movie.original_title }}</div>
+        <div>Lingua: {{ movie.original_language }}</div>
+        <div>Voto: {{ movie.vote_average}}</div>
       </li>
     </ul>
   </div>
 </template>
-${this.api_key}
-${this.query}
+
 <script>
 import axios from 'axios'
 
@@ -34,7 +36,7 @@ export default {
           }
         })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.movies = res.data.results
         })
     }
