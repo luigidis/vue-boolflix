@@ -42,7 +42,9 @@ export default {
     }
   },
   created() {
+    if (this.query) {
     this.searchMovies()
+    }
   }
 }
 
