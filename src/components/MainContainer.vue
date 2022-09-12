@@ -28,6 +28,8 @@ export default {
   },
   methods: {
     searchMovies() {
+      if(this.query.trim() === '')
+        return
       axios
         .get(`${this.BASE_URL}/search/movie`, {
           params: {
