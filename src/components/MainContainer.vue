@@ -6,18 +6,25 @@
       <li v-for="movie in movies" :key="movie.id">
         <div>Titolo:{{ movie.title }}</div>
         <div>Titolo Originale:{{ movie.original_title }}</div>
-        <div>Lingua: {{ movie.original_language }}</div>
+        <div class="pe-2">Lingua:
+          <lang-flag :iso="movie.original_language" :squared="false" />
+        </div>
         <div>Voto: {{ movie.vote_average}}</div>
       </li>
     </ul>
   </div>
 </template>
+        
 
 <script>
 import axios from 'axios'
+import LangFlag from 'vue-lang-code-flags'
 
 export default {
   name: 'MainContainer',
+  components: {
+    LangFlag,
+  },
   data() {
     return {
       movies: [],
@@ -28,7 +35,7 @@ export default {
   },
   methods: {
     searchMovies() {
-      if(this.query.trim() === '')
+      if (this.query.trim() === '')
         return
       axios
         .get(`${this.BASE_URL}/search/movie`, {
@@ -45,7 +52,7 @@ export default {
   },
   created() {
     if (this.query) {
-    this.searchMovies()
+      this.searchMovies()
     }
   }
 }
