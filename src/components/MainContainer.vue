@@ -1,8 +1,8 @@
 <template>
   <div class="main container py-5">
     <input type="text" v-model="query">
-    <button class="ms-2" @click="clickSearch">Cerca!</button>
-    <h2>Films</h2>
+    <button id="search" class="ms-2" @click="clickSearch">Cerca!</button>
+    <h2 :class="moviesActive">Films</h2>
     <ul>
       <li v-for="movie in movies" :key="movie.id">
         <div>Titolo:{{ movie.title }}</div>
@@ -11,9 +11,12 @@
           <lang-flag :iso="movie.original_language" :squared="false" />
         </div>
         <div>Voto: {{ movie.vote_average}}</div>
+        <figure>
+          <img :src="img_url + movie.poster_path" :alt="movie.title">
+        </figure>
       </li>
     </ul>
-    <h2>Series</h2>
+    <h2 :class="seriesActive">Series</h2>
     <ul class="series_container">
       <li v-for="serie in series" :key="serie.id">
         <div>Titolo: {{ serie.name }}</div>
@@ -22,11 +25,14 @@
           <lang-flag :iso="serie.original_language" :squared="false" />
         </div>
         <div>Voto: {{ serie.vote_average }}</div>
+        <figure>
+          <img :src="img_url + serie.poster_path" :alt="serie.name">
+        </figure>
       </li>
-
     </ul>
   </div>
 </template>
+
         
 
 <script>
@@ -38,6 +44,7 @@ export default {
   components: {
     LangFlag,
   },
+
   data() {
     return {
       movies: [],
@@ -45,8 +52,11 @@ export default {
       api_key: '7b5d3ffe89177bc82927826d88ed3293',
       query: '',
       BASE_URL: 'https://api.themoviedb.org/3',
+      img_url: 'http://image.tmdb.org/t/p/w154/',
+      moviesActive: '',
     }
   },
+
   methods: {
     searchMovies() {
       if (this.query.trim() === '')
@@ -59,9 +69,9 @@ export default {
           }
         })
         .then((res) => {
-          // console.log(res)
           this.movies = res.data.results
         })
+      this.seriesActive = 'active'
     },
     searchSeries() {
       if (this.query.trim() === '')
@@ -74,29 +84,43 @@ export default {
           }
         })
         .then((res) => {
-          // console.log(res)
           this.series = res.data.results
         })
+      this.moviesActive = 'active'
     },
+
     clickSearch() {
-       this.searchMovies();
-       this.searchSeries();
+      this.searchMovies();
+      this.searchSeries();
+      this.active()
     }
   },
-    
   created() {
     if (this.query) {
       this.clickSearch()
     }
   }
 }
-      
-
-
-
 </script>
 
 
-<style scoped lang="scss">
 
+
+
+
+
+
+
+<style scoped lang="scss">
+.main {
+  h2 {
+    display: none;
+  }
+
+  .active {
+    display: block;
+  }
+
+
+}
 </style>
