@@ -1,9 +1,9 @@
 <template>
   <div class="main container py-5">
-    <nav class="navbar">
+    
       <input type="text" v-model="query">
       <button id="search" class="ms-2" @click="clickSearch">Cerca!</button>
-    </nav>
+    
     <h2 :class="moviesActive">Films</h2>
     <ul>
       <li v-for="movie in movies" :key="movie.id">
@@ -15,10 +15,10 @@
         <ul>
           Voto: {{ getStars(movie.vote_average) }}
           <li v-for="n in getStars(movie.vote_average)" :key="n">
-            <font-awesome-icon icon="fa-solid fa-star" />
+            <font-awesome-icon icon="fa-solid fa-star"/>
           </li>
           <li v-for="n in (5 - (getStars(movie.vote_average)))" :key="n + getStars(movie.vote_average)">
-            <font-awesome-icon icon="fa-regular fa-star" />
+            <font-awesome-icon icon="fa-regular fa-star"/>
           </li>
         </ul>
 
@@ -33,7 +33,7 @@
         <div>Titolo: {{ serie.name }}</div>
         <div>Titolo Originale: {{ serie.original_name}}</div>
         <div>Lingua:
-          <lang-flag :iso="serie.original_language" :squared="false" />
+          <lang-flag :iso="serie.original_language" :squared="false"/>
         </div>
         <div>
           Voto: {{ getStars(serie.vote_average) }}
@@ -124,6 +124,7 @@ export default {
     },
     getStars(vote) {
       const stars = Math.round(vote / 2)
+      console.log('Le stelle sono:' + stars)
       return stars
     }
   },
@@ -153,10 +154,7 @@ export default {
   .active {
     display: block;
   }
-
-  .navbar {
-    
-  }
+  
 }
 </style>
 

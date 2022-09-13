@@ -18,10 +18,6 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
-//Flags Library
-import LangFlag from 'vue-lang-code-flags';
-Vue.component('lang-flag', LangFlag);
-
 //FontAwesome
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -41,4 +37,10 @@ library.add(faStar, emptyStar)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
+
+//Flags Library
+import LangFlag from 'vue-lang-code-flags';
+Vue.component('lang-flag', LangFlag);
+
+
 
