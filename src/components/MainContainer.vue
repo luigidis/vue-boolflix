@@ -1,7 +1,9 @@
 <template>
   <div class="main container py-5">
-    <input type="text" v-model="query">
-    <button id="search" class="ms-2" @click="clickSearch">Cerca!</button>
+    <nav class="navbar">
+      <input type="text" v-model="query">
+      <button id="search" class="ms-2" @click="clickSearch">Cerca!</button>
+    </nav>
     <h2 :class="moviesActive">Films</h2>
     <ul>
       <li v-for="movie in movies" :key="movie.id">
@@ -74,9 +76,9 @@ export default {
       poster_url: 'http://image.tmdb.org/t/p/w154/',
       moviesActive: '',
       seriesActive: '',
-
     }
   },
+
 
   computed: {
 
@@ -150,6 +152,10 @@ export default {
 
   .active {
     display: block;
+  }
+
+  .navbar {
+    
   }
 }
 </style>

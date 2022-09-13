@@ -41,3 +41,4 @@ library.add(faStar, emptyStar)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
+
