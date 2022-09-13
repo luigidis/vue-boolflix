@@ -10,7 +10,10 @@
         <div class="pe-2">Lingua:
           <lang-flag :iso="movie.original_language" :squared="false" />
         </div>
-        <div>Voto: {{ getStars(movie.vote_average) }}</div>
+        <div>
+          Voto: {{ getStars(movie.vote_average) }}
+          <li v-for="n in getStars(movie.vote_average)" :key="n">{{n}}</li>
+        </div>
         <figure>
           <img :src="poster_url + movie.poster_path" :alt="movie.title">
         </figure>
@@ -24,7 +27,12 @@
         <div>Lingua:
           <lang-flag :iso="serie.original_language" :squared="false" />
         </div>
-        <div>Voto: {{ serie.vote_average }}</div>
+        <div>
+          Voto: {{ getStars(serie.vote_average) }}
+          <ul>
+            <li v-for="n in getStars(serie.vote_average)" :key="n">{{n}}</li>
+          </ul>
+        </div>
         <figure>
           <img :src="poster_url + serie.poster_path" :alt="serie.name">
         </figure>
@@ -55,12 +63,12 @@ export default {
       poster_url: 'http://image.tmdb.org/t/p/w154/',
       moviesActive: '',
       seriesActive: '',
-      
+
     }
   },
 
   computed: {
-    
+
   },
 
   methods: {
@@ -78,7 +86,7 @@ export default {
           this.movies = res.data.results
           this.seriesActive = 'active'
         })
-      
+
     },
     searchSeries() {
       if (this.query.trim() === '')
@@ -94,7 +102,7 @@ export default {
           this.series = res.data.results
           this.moviesActive = 'active'
         })
-      
+
     },
 
     clickSearch() {
@@ -106,7 +114,7 @@ export default {
       return stars
     }
   },
-      
+
   created() {
     if (this.query) {
       this.clickSearch()
@@ -128,6 +136,7 @@ export default {
   h2 {
     display: none;
   }
+
   .active {
     display: block;
   }
