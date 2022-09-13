@@ -10,9 +10,9 @@
         <div class="pe-2">Lingua:
           <lang-flag :iso="movie.original_language" :squared="false" />
         </div>
-        <div>Voto: {{ movie.vote_average}}</div>
+        <div>Voto: {{ getStars(movie.vote_average) }}</div>
         <figure>
-          <img :src="img_url + movie.poster_path" :alt="movie.title">
+          <img :src="poster_url + movie.poster_path" :alt="movie.title">
         </figure>
       </li>
     </ul>
@@ -26,7 +26,7 @@
         </div>
         <div>Voto: {{ serie.vote_average }}</div>
         <figure>
-          <img :src="img_url + serie.poster_path" :alt="serie.name">
+          <img :src="poster_url + serie.poster_path" :alt="serie.name">
         </figure>
       </li>
     </ul>
@@ -52,9 +52,15 @@ export default {
       api_key: '7b5d3ffe89177bc82927826d88ed3293',
       query: '',
       BASE_URL: 'https://api.themoviedb.org/3',
-      img_url: 'http://image.tmdb.org/t/p/w154/',
+      poster_url: 'http://image.tmdb.org/t/p/w154/',
       moviesActive: '',
+      seriesActive: '',
+      
     }
+  },
+
+  computed: {
+    
   },
 
   methods: {
@@ -70,8 +76,9 @@ export default {
         })
         .then((res) => {
           this.movies = res.data.results
+          this.seriesActive = 'active'
         })
-      this.seriesActive = 'active'
+      
     },
     searchSeries() {
       if (this.query.trim() === '')
@@ -85,16 +92,21 @@ export default {
         })
         .then((res) => {
           this.series = res.data.results
+          this.moviesActive = 'active'
         })
-      this.moviesActive = 'active'
+      
     },
 
     clickSearch() {
       this.searchMovies();
       this.searchSeries();
-      this.active()
+    },
+    getStars(vote) {
+      const stars = Math.round(vote / 2)
+      return stars
     }
   },
+      
   created() {
     if (this.query) {
       this.clickSearch()
@@ -116,11 +128,11 @@ export default {
   h2 {
     display: none;
   }
-
   .active {
     display: block;
   }
-
-
 }
 </style>
+
+
+
