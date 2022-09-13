@@ -10,10 +10,16 @@
         <div class="pe-2">Lingua:
           <lang-flag :iso="movie.original_language" :squared="false" />
         </div>
-        <div>
+        <ul>
           Voto: {{ getStars(movie.vote_average) }}
-          <li v-for="n in getStars(movie.vote_average)" :key="n">{{n}}</li>
-        </div>
+          <li v-for="n in getStars(movie.vote_average)" :key="n">
+            <font-awesome-icon icon="fa-solid fa-star" />
+          </li>
+          <li v-for="n in (5 - (getStars(movie.vote_average)))" :key="n + getStars(movie.vote_average)">
+            <font-awesome-icon icon="fa-regular fa-star" />
+          </li>
+        </ul>
+
         <figure>
           <img :src="poster_url + movie.poster_path" :alt="movie.title">
         </figure>
@@ -30,7 +36,12 @@
         <div>
           Voto: {{ getStars(serie.vote_average) }}
           <ul>
-            <li v-for="n in getStars(serie.vote_average)" :key="n">{{n}}</li>
+            <li v-for="n in getStars(serie.vote_average)" :key="n">
+              <font-awesome-icon icon="fa-solid fa-star" />
+            </li>
+            <li v-for="n in (5 - (getStars(serie.vote_average)))" :key="n + getStars(serie.vote_average)">
+              <font-awesome-icon icon="fa-regular fa-star" />
+            </li>
           </ul>
         </div>
         <figure>
