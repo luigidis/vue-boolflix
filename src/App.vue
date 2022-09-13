@@ -24,5 +24,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+  body {
+    background-color: rgba(128, 128, 128, 0.752);
+  }
 </style>
