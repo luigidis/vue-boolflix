@@ -18,13 +18,15 @@ export default {
     MainHeader,
     MainFooter
   },
-  
+
 }
- 
+
 </script>
 
 <style lang="scss">
+html {
   body {
     background-color: rgba(128, 128, 128, 0.752);
   }
+}
 </style>
